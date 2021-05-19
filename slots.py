@@ -13,6 +13,9 @@ exit_flag = False
 
 
 def roll():
+    """
+    Rolls each individual slot, then display a rolling animation in the terminal
+    """
     for index in range(len(slots)):
         slots[index] = random.choice(possibilities)
 
@@ -20,6 +23,13 @@ def roll():
 
 
 def display_roll(rolls):
+    """
+    Displays an animation by rolling temporary slots and displaying them
+    temporarily before eventually showing what the actual selections were.
+
+    The rolls variable is how many times we roll the temporary slots before
+    displaying the actual rolls of each slot
+    """
     temp_slots = [None, None, None]
     for _ in range(rolls):
         os.system('clear')
@@ -33,6 +43,13 @@ def display_roll(rolls):
 
 
 def input_money():
+    """
+    Get the users input for how much money they are going to have in total
+    to begin placing bets on each roll
+
+    we do some checks to make sure they input an actual numeric string, and
+    that the amount of money they put in is greater than 0
+    """
     global money
     str_money = input("How much money would you like to deposit: ")
 
@@ -47,6 +64,10 @@ def input_money():
 
 
 def input_roll_bet():
+    """
+    For each roll we ask the player to bet some money on that roll, then
+    subtract that amount from the total amount of money put in
+    """
     global roll_bet, money
     str_bet = input("How much money would you like to bet on this roll: ")
 
@@ -64,6 +85,10 @@ def input_roll_bet():
 
 
 def input_continue_playing():
+    """
+    Make sure the player has enough money to continue playing, then ask them
+    if they would like to continue playing, or walk away.
+    """
     global exit_flag
     if money <= 0:
         exit_flag = True
@@ -78,6 +103,10 @@ def input_continue_playing():
 
 
 def check_rewards():
+    """
+    Check how the slots were rolled to see if we should reward the player.
+    Then display how much money they have in total
+    """
     global money
     if slots[0] == slots[1] == slots[2]:
         print(f"Winner, Winner, Chicken Dinner!! You won {roll_bet * 4}")
